@@ -76,11 +76,6 @@ export default function Home() {
   const [showClearAlert, setShowClearAlert] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Load saved messages on component mount
-  useEffect(() => {
-    loadSavedMessages();
-  }, []);
-
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     scrollToBottom();
@@ -126,6 +121,10 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    loadSavedMessages();
+  }, []);
+
   const saveMessagesToStorage = (newMessages: Message[]) => {
     try {
       const messagesForStorage = newMessages.map(msg => ({
@@ -158,15 +157,17 @@ export default function Home() {
 
     try {
       // Send message to Flask backend
-      const response = await fetch('http://127.0.0.1:5000/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: currentInput
-        }),
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + '/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: currentInput
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
