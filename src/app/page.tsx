@@ -1,13 +1,5 @@
-'use client'
-import LoginPage from "@/components/LoginPage";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import Page from "./(first-wrapper)/page";      
 
 export default function Home() {
-  const router = useRouter();
-
-  useEffect(()=> {
-    router.push('/login')
-  },[])
-  return <LoginPage />;
+    return <Page />;
 }

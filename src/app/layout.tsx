@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { silenceConsole } from "../utils/silenceConsole";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Manoj Chatbot",
-  description: "Manoj Chatbot",
+  title: "ManojAI Chatbot",
+  description: "ManojAI Chatbot",
 };
 
 export default function RootLayout({
